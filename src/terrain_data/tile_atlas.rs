@@ -106,7 +106,15 @@ impl AtlasTileAttachmentWithData {
             } else {
                 let path = self.tile.coordinate.path(&path, "bin");
 
-                fs::write(path, self.data.bytes()).unwrap();
+                match fs::write(path.clone(), self.data.bytes()) {
+                    Ok(_) => {}
+                    Err(e) => {
+                        println!("Error saving tile: {}", path.clone());
+                        println!("{:?}", e);
+                        panic!("Can't save tile. {}, {:?}", path, e);
+                    }
+                    
+                }
 
                 // println!("Finished saving tile: {path}");
             }
