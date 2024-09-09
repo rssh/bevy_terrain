@@ -404,14 +404,11 @@ pub(crate) fn preprocessor_load_tile(
 ) {
     for mut preprocessor in preprocessors.iter_mut() {
         preprocessor.loading_tiles.retain_mut(|tile| {
-            println!("preprocessor:debug, loadign {:?}", tile.id);
             if let Some(image) = images.get_mut(tile.id) {
-                println!("tile {:?} - image loaded", tile.id);
                 image.texture_descriptor.format = tile.format.processing_format();
                 image.sampler = ImageSampler::linear();
                 false
             } else {
-                println!("tile {:?} not ready, skip", tile.id);
                 true
             }
         });
