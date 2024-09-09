@@ -383,7 +383,7 @@ pub(crate) fn select_ready_tasks(
             {
                 let task = task_queue.pop_front().unwrap();
 
-                // task.debug();
+                task.debug();
 
                 if matches!(task.task_type, PreprocessTaskType::Save) {
                     tile_atlas.save(task.tile);
